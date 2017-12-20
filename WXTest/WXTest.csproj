@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{94F16709-C2BB-4888-81FE-588D981C0E14}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WXTest</RootNamespace>
+    <AssemblyName>WXTest</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aliyun.OSS, Version=2.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aliyun.OSS.SDK.2.5.3\lib\Aliyun.OSS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Senparc.Weixin, Version=4.18.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.4.18.3\lib\net45\Senparc.Weixin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP, Version=14.8.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.MP.14.8.5\lib\net45\Senparc.Weixin.MP.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EcmoController.cs" />
+    <Compile Include="Controllers\GetingeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OAuth2Controller.cs" />
+    <Compile Include="Controllers\OssUploadController.cs" />
+    <Compile Include="DB\Ecmo_Enroll.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Ecmo_User.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Getinge_Dept_Product.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Getinge_Product.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Getinge_Product_Info.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\ModelDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\ModelDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\ModelDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Config\WxConfig.cs" />
+    <Compile Include="Models\Extensions\ConvertJson.cs" />
+    <Compile Include="Models\Extensions\ConvertObject.cs" />
+    <Compile Include="Models\Extensions\EncryptExtensions.cs" />
+    <Compile Include="Models\Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Models\Extensions\ObjectExtensions.cs" />
+    <Compile Include="Models\Extensions\StringExtensions.cs" />
+    <Compile Include="Models\Helper\DBHerlper.cs" />
+    <Compile Include="Models\Log\Log.cs" />
+    <Compile Include="Models\Log\LogConfig.cs" />
+    <Compile Include="Models\Model\EcmoBll.cs" />
+    <Compile Include="Models\Model\GetingeData.cs" />
+    <Compile Include="Models\Model\GetingeProductPrantsBll.cs" />
+    <Compile Include="Models\Model\SmithQuestion.cs" />
+    <Compile Include="Models\OssImage\FileUrlTool.cs" />
+    <Compile Include="Models\OssImage\ImageData.cs" />
+    <Compile Include="Models\OssImage\OssConfig.cs" />
+    <Compile Include="Models\OssImage\OssUploadHelper.cs" />
+    <Compile Include="Models\OssImage\OssUploadObject.cs" />
+    <Compile Include="Models\OssImage\PutObjectAPI.cs" />
+    <Compile Include="Models\RandomCode.cs" />
+    <Compile Include="Models\Tool\ConvertObjectEntity.cs" />
+    <Compile Include="Models\Tool\ImportExportTool_T.cs" />
+    <Compile Include="Models\WeiXinUser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\admin\main.css" />
+    <Content Include="Content\css\animations.css" />
+    <Content Include="Content\css\cus-form.css" />
+    <Content Include="Content\css\cus-form1.css" />
+    <Content Include="Content\css\cus-layar-mobile.css" />
+    <Content Include="Content\css\cus-main.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\music\music.css" />
+    <Content Include="Content\css\music\music.js" />
+    <Content Include="Content\css\music\music.mp3" />
+    <Content Include="Content\css\music\soundSW.png" />
+    <Content Include="Content\css\music\soundSW1.png" />
+    <Content Include="Content\css\nav-drawer\css\drawer.css" />
+    <Content Include="Content\css\nav-drawer\css\drawer.min.css" />
+    <Content Include="Content\css\nav-drawer\js\drawer.js" />
+    <Content Include="Content\css\nav-drawer\js\drawer.min.js" />
+    <Content Include="Content\css\nav-three\images\1.png" />
+    <Content Include="Content\css\nav-three\images\2.png" />
+    <Content Include="Content\css\nav-three\images\right.png" />
+    <Content Include="Content\css\nav-three\nav-three.css" />
+    <Content Include="Content\css\nav-three\images\off.png" />
+    <Content Include="Content\css\nav-three\images\on.png" />
+    <Content Include="Content\css\nav-three\nav-three.js" />
+    <Content Include="Content\css\nav\hamburger-retina.gif" />
+    <Content Include="Content\css\nav\hamburger.gif" />
+    <Content Include="Content\css\nav\responsive-nav.css" />
+    <Content Include="Content\css\nav\responsive-nav.js" />
+    <Content Include="Content\css\nav\responsive-nav.min.js" />
+    <Content Include="Content\css\nav\theme.css" />
+    <Content Include="Content\Ecmo\images\btn-back.png" />
+    <Content Include="Content\Ecmo\images\demo\1.jpg" />
+    <Content Include="Content\Ecmo\images\demo\2.jpg" />
+    <Content Include="Content\Ecmo\images\demo\3.jpg" />
+    <Content Include="Content\Ecmo\images\demo\4.jpg" />
+    <Content Include="Content\Ecmo\images\demo\btn-back.png" />
+    <Content Include="Content\Ecmo\images\demo\ml.jpg" />
+    <Content Include="Content\Ecmo\images\hy-ch.jpg" />
+    <Content Include="Content\Ecmo\images\hy-en.jpg" />
+    <Content Include="Content\Ecmo\images\hy-ml.jpg" />
+    <Content Include="Content\Ecmo\images\login.jpg" />
+    <Content Include="Content\Ecmo\images\rl.jpg" />
+    <Content Include="Content\Ecmo\images\yl.jpg" />
+    <Content Include="Content\Ecmo\images\zl.jpg" />
+    <Content Include="Content\Getinge\css\product-info.css" />
+    <Content Include="Content\Getinge\css\product-tree.css" />
+    <Content Include="Content\Getinge\images\demo.jpg" />
+    <Content Include="Content\Getinge\images\foot.jpg" />
+    <Content Include="Content\Getinge\images\logo.png" />
+    <Content Include="Content\Getinge\images\nav\nav.png" />
+    <Content Include="Content\Getinge\images\product-act.jpg" />
+    <Content Include="Content\Getinge\images\product-ic.jpg" />
+    <Content Include="Content\Getinge\images\product-sw.jpg" />
+    <Content Include="Content\Getinge\images\company-info.jpg" />
+    <Content Include="Content\Getinge\images\company-lx.jpg" />
+    <Content Include="Content\Getinge\images\company-main.jpg" />
+    <Content Include="Content\Getinge\images\company-zp.jpg" />
+    <Content Include="Content\Getinge\images\company.jpg" />
+    <Content Include="Content\Getinge\images\dept-info6.jpg" />
+    <Content Include="Content\Getinge\images\dept-main.jpg" />
+    <Content Include="Content\Getinge\images\company-ls.jpg" />
+    <Content Include="Content\Getinge\images\dept1.jpg" />
+    <Content Include="Content\Getinge\images\dept2.jpg" />
+    <Content Include="Content\Getinge\images\dept3.jpg" />
+    <Content Include="Content\Getinge\images\dept4.jpg" />
+    <Content Include="Content\Getinge\images\dept5.jpg" />
+    <Content Include="Content\Getinge\images\dept6.jpg" />
+    <Content Include="Content\Getinge\images\dept7.jpg" />
+    <Content Include="Content\Getinge\images\dept8.jpg" />
+    <Content Include="Content\Getinge\images\dept9.jpg" />
+    <Content Include="Content\Getinge\images\company-law.jpg" />
+    <Content Include="Content\Getinge\images\company-gs.jpg" />
+    <Content Include="Content\Getinge\images\company-gs.mp4" />
+    <Content Include="Content\Getinge\images\main.jpg" />
+    <Content Include="Content\Getinge\images\product-main.jpg" />
+    <Content Include="Content\Getinge\images\product-top.jpg" />
+    <Content Include="Content\Getinge\images\product.jpg" />
+    <Content Include="Content\Getinge\images\search.png" />
+    <Content Include="Content\Search\css\my.css" />
+    <Content Include="Content\Search\index.html" />
+    <Content Include="Content\Search\js\my.js" />
+    <Content Include="Content\Search\search.html" />
+    <Content Include="DB\ModelDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDB.edmx</DependentUpon>
+      <LastGenOutput>ModelDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DB\ModelDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelDB.edmx</DependentUpon>
+      <LastGenOutput>ModelDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\public\form-validate.js" />
+    <Content Include="Scripts\public\format.js" />
+    <Content Include="Scripts\public\getJsonTree.js" />
+    <Content Include="Scripts\public\jquery-2.1.3.js" />
+    <Content Include="Scripts\public\jquery-2.1.3.min.js" />
+    <Content Include="Scripts\public\jquery-3.2.1.js" />
+    <Content Include="Scripts\public\load-image.all.min.js" />
+    <Content Include="Scripts\public\public.js" />
+    <Content Include="Scripts\public\qrcode.min.js" />
+    <Content Include="Views\search\css\my.css" />
+    <Content Include="Views\search\index.html" />
+    <Content Include="Views\search\js\my.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\OAuth2\" />
+    <Folder Include="Views\OssUpload\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <EntityDeploy Include="DB\ModelDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DB\ModelDB.edmx.diagram">
+      <DependentUpon>ModelDB.edmx</DependentUpon>
+    </Content>
+    <None Include="Project_Readme.html" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_MPageLayout.cshtml" />
+    <Content Include="Views\Ecmo\Index.cshtml" />
+    <Content Include="Views\Ecmo\demo.cshtml" />
+    <Content Include="Views\Ecmo\hy.cshtml" />
+    <Content Include="Views\Ecmo\rl.cshtml" />
+    <Content Include="Views\Ecmo\yl.cshtml" />
+    <Content Include="Views\Ecmo\zl.cshtml" />
+    <None Include="Properties\PublishProfiles\WxTest.pubxml" />
+    <Content Include="Views\Admin\AdminEcmo.cshtml" />
+    <Content Include="Views\Getinge\Index.cshtml" />
+    <Content Include="Views\Getinge\Company.cshtml" />
+    <Content Include="Views\Getinge\Product.cshtml" />
+    <Content Include="Views\Getinge\ProductSeach.cshtml" />
+    <Content Include="Views\Getinge\CompanyLs.cshtml" />
+    <Content Include="Views\Getinge\ProductInfo.cshtml" />
+    <Content Include="Views\Getinge\CompanyInfo.cshtml" />
+    <Content Include="Views\Getinge\CompanyMain.cshtml" />
+    <Content Include="Views\Getinge\ProductMain.cshtml" />
+    <Content Include="Views\Getinge\DeptMain.cshtml" />
+    <Content Include="Views\Getinge\Dept.cshtml" />
+    <Content Include="Views\Getinge\CompanyGs.cshtml" />
+    <Content Include="Views\Getinge\CompanyLaw.cshtml" />
+    <Content Include="Views\Getinge\CompanyZp.cshtml" />
+    <Content Include="Views\Getinge\ProductSw.cshtml" />
+    <Content Include="Views\Getinge\ProductIc.cshtml" />
+    <Content Include="Views\Getinge\ProductAct.cshtml" />
+    <Content Include="Views\Getinge\ProductInfo2.cshtml" />
+    <Content Include="Views\Getinge\ProductInfo3.cshtml" />
+    <Content Include="Views\Admin\AdminGetinge.cshtml" />
+    <Content Include="Views\Shared\_MNav2Layout.cshtml" />
+    <Content Include="Views\Getinge\Nav.cshtml" />
+    <Content Include="Views\Shared\_MNav1Layout.cshtml" />
+    <Content Include="Views\Getinge\Nav1.cshtml" />
+    <Content Include="Views\Admin\AdminGetingeProductEdit.cshtml" />
+    <Content Include="Views\Shared\_AdminEditLayout.cshtml" />
+    <Content Include="Views\Shared\_MPSearchPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54559</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54559/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此项目引用这台计算机上缺少的 NuGet 程序包。使用 NuGet 程序包还原可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="wxtest_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ecmo_Enroll">
+          <Key>
+            <PropertyRef Name="enroll_id" />
+          </Key>
+          <Property Name="enroll_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="openid" Type="varchar" MaxLength="150" />
+          <Property Name="enroll_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="enroll_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Ecmo_User">
+          <Key>
+            <PropertyRef Name="user_name" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="openid" Type="varchar" MaxLength="150" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_hospital" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_dept" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_phone" Type="varchar" MaxLength="50" />
+          <Property Name="user_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Getinge_Dept_Product">
+          <Key>
+            <PropertyRef Name="dept_id" />
+          </Key>
+          <Property Name="dept_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parent_id" Type="int" />
+          <Property Name="dept_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="product_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Getinge_Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parent_id" Type="int" />
+          <Property Name="dept_id" Type="int" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="product_mark" Type="nvarchar" MaxLength="50" />
+          <Property Name="product_level" Type="int" />
+        </EntityType>
+        <EntityType Name="Getinge_Product_Info">
+          <Key>
+            <PropertyRef Name="info_id" />
+          </Key>
+          <Property Name="info_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="info_type" Type="varchar" MaxLength="50" />
+          <Property Name="info_img_index" Type="int" />
+          <Property Name="info_content" Type="nvarchar" MaxLength="1000" />
+          <Property Name="info_date" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="wxtest_dbModelStoreContainer">
+          <EntitySet Name="Ecmo_Enroll" EntityType="Self.Ecmo_Enroll" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ecmo_User" EntityType="Self.Ecmo_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Getinge_Dept_Product" EntityType="Self.Getinge_Dept_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Getinge_Product" EntityType="Self.Getinge_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Getinge_Product_Info" EntityType="Self.Getinge_Product_Info" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wxtest_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="wxtest_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ecmo_User" EntityType="wxtest_dbModel.Ecmo_User" />
+          <EntitySet Name="Ecmo_Enroll" EntityType="wxtest_dbModel.Ecmo_Enroll" />
+          <EntitySet Name="Getinge_Product_Info" EntityType="wxtest_dbModel.Getinge_Product_Info" />
+          <EntitySet Name="Getinge_Dept_Product" EntityType="wxtest_dbModel.Getinge_Dept_Product" />
+          <EntitySet Name="Getinge_Product" EntityType="wxtest_dbModel.Getinge_Product" />
+        </EntityContainer>
+        <EntityType Name="Ecmo_User">
+          <Key>
+            <PropertyRef Name="user_name" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="openid" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="user_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_hospital" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_dept" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Ecmo_Enroll">
+          <Key>
+            <PropertyRef Name="enroll_id" />
+          </Key>
+          <Property Name="enroll_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="openid" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="enroll_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="enroll_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Getinge_Product_Info">
+          <Key>
+            <PropertyRef Name="info_id" />
+          </Key>
+          <Property Name="info_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="info_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="info_img_index" Type="Int32" />
+          <Property Name="info_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="info_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Getinge_Dept_Product">
+          <Key>
+            <PropertyRef Name="dept_id" />
+          </Key>
+          <Property Name="dept_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parent_id" Type="Int32" />
+          <Property Name="dept_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="product_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Getinge_Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parent_id" Type="Int32" />
+          <Property Name="dept_id" Type="Int32" />
+          <Property Name="product_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="product_mark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="product_level" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wxtest_dbModelStoreContainer" CdmEntityContainer="wxtest_dbEntities">
+          <EntitySetMapping Name="Ecmo_User">
+            <EntityTypeMapping TypeName="wxtest_dbModel.Ecmo_User">
+              <MappingFragment StoreEntitySet="Ecmo_User">
+                <ScalarProperty Name="user_date" ColumnName="user_date" />
+                <ScalarProperty Name="user_phone" ColumnName="user_phone" />
+                <ScalarProperty Name="user_dept" ColumnName="user_dept" />
+                <ScalarProperty Name="user_hospital" ColumnName="user_hospital" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="openid" ColumnName="openid" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ecmo_Enroll">
+            <EntityTypeMapping TypeName="wxtest_dbModel.Ecmo_Enroll">
+              <MappingFragment StoreEntitySet="Ecmo_Enroll">
+                <ScalarProperty Name="enroll_date" ColumnName="enroll_date" />
+                <ScalarProperty Name="enroll_name" ColumnName="enroll_name" />
+                <ScalarProperty Name="openid" ColumnName="openid" />
+                <ScalarProperty Name="enroll_id" ColumnName="enroll_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Getinge_Product_Info">
+            <EntityTypeMapping TypeName="wxtest_dbModel.Getinge_Product_Info">
+              <MappingFragment StoreEntitySet="Getinge_Product_Info">
+                <ScalarProperty Name="info_date" ColumnName="info_date" />
+                <ScalarProperty Name="info_content" ColumnName="info_content" />
+                <ScalarProperty Name="info_img_index" ColumnName="info_img_index" />
+                <ScalarProperty Name="info_type" ColumnName="info_type" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="info_id" ColumnName="info_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Getinge_Dept_Product">
+            <EntityTypeMapping TypeName="wxtest_dbModel.Getinge_Dept_Product">
+              <MappingFragment StoreEntitySet="Getinge_Dept_Product">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Getinge_Product">
+            <EntityTypeMapping TypeName="wxtest_dbModel.Getinge_Product">
+              <MappingFragment StoreEntitySet="Getinge_Product">
+                <ScalarProperty Name="product_level" ColumnName="product_level" />
+                <ScalarProperty Name="product_mark" ColumnName="product_mark" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,104 @@
+﻿.btn {
+    width: 80vw;
+    left: 8vw;
+    top: 25vw;
+    height: 9.5vw;
+    border: 1px solid red;
+}
+
+.btn1 {
+}
+
+.btn2 {
+    top: 50vw;
+}
+
+.btn3 {
+    top: 75vw;
+}
+
+.menu {
+    margin: 4vw 6vw;
+    margin-top: 2px;
+}
+
+ul.menu ul, ul.menu li {
+    border: none;
+}
+
+ul.menu > ul, ul.menu > li {
+    border-radius: 5px;
+    margin: 3px 0;
+}
+
+ul.menu ul.menu1 > ul, ul.menu ul.menu1 > li {
+    border-radius: 5px;
+    margin: 3px 0;
+    border-radius: 5px;
+}
+
+ul.menu > li {
+    /*border-bottom: solid 1px #fff;*/
+}
+
+    ul.menu > li > div {
+        background-color: #012353;
+        height: 36px;
+        line-height: 36px;
+        color: #fff;
+        padding: 0 20px;
+        border-radius: 5px;
+    }
+
+
+
+ul.menu ul.menu1 > li {
+    background: none;
+    background-color: #ebe3e2 !important;
+}
+
+    ul.menu ul.menu1 > li > a {
+        background-color: #F6F2F3 !important;
+        color: #012353;
+        margin: auto;
+        padding: 0 20px;
+        border-radius: 5px;
+        height: 36px;
+        line-height: 36px;
+        font-size: 15px;
+    }
+
+        ul.menu ul.menu1 > li > a.inactives {
+            border-radius: 5px 5px 0 0;
+        }
+
+
+ul.menu ul.menu1 li .inactive {
+    background: url(/Content/css/nav-three/images/1.png) no-repeat center;
+    background-position-x: 95% !important;
+}
+
+ul.menu ul.menu1 li .inactives {
+    background: url(/Content/css/nav-three/images/2.png) no-repeat center;
+    background-position-x: 95% !important;
+}
+
+ul.menu .menu1 > li > a.product-info {
+    background: url(/Content/css/nav-three/images/right.png) no-repeat 95% center;
+    background-size: 15px;
+    color: #000;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+ul.menu .menu2 > li > a.product-info {
+    background: url(/Content/css/nav-three/images/right.png) no-repeat right center;
+    background-size: 15px;
+    color: #000;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -1,0 +1,99 @@
+﻿*{
+    padding:0;
+    margin:0;
+}
+.abs {
+    position: absolute;
+}
+
+.header {
+    height: 59px;
+    border-bottom: 1px solid #404553;
+    background-color: #393D49;
+    width:100%;
+}
+
+.logo {
+    left: 0;
+    color: white;
+    line-height: 59px;
+}
+
+.component {
+    position: absolute;
+    width: 200px;
+    left: 120px;
+    top: 16px;
+}
+
+    .component .layui-input {
+        height: 30px;
+        line-height: 30px;
+        padding-left: 12px;
+        background-color: #424652;
+        background-color: rgba(255,255,255,.05);
+        border: none 0;
+        color: #fff;
+        font-size: 12px;
+    }
+
+.header .layui-nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+    background: none;
+}
+
+.btn-update {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border: 1px solid red;
+}
+
+.upload-img {
+    width: 30%;
+}
+
+.state-no {
+    color: #FF5722;
+}
+
+.state-yes {
+    color: #5FB878;
+}
+
+.layui-elem-quote {
+    margin-bottom: 0;
+}
+
+.table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 2px 8px !important;
+}
+
+
+.tran {
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.tranY {
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.tranX {
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.layui-tab-content {
+    max-width: 1200px;
+    margin: auto;
+}

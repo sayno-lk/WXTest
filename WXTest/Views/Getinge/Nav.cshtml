@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Nav";
+    Layout = "~/Views/Shared/_MNav2Layout.cshtml";
+}
+  <style>
+         .wrap{
+             background-color:red;
+         }
+  </style>
+<div class="wrap">
+ 
+</div>
+<script>
+    $(window).on("load", function () {
+        $(".wrap").css("height", $(window).height());
+    });
+</script>
+

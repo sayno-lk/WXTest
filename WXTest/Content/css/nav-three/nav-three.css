@@ -1,0 +1,93 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+ul.menu1, li {
+    list-style: none;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+}
+
+ul.menu1 {
+    width: 100%;
+    /*border-top: solid 1px #fff;*/
+    /*border-bottom: solid 1px #fff;*/
+}
+    /*ul.yiji li{
+       padding:0 10px;
+   }*/
+    ul.menu1 li {
+        background-color: #012353;
+        border-bottom: solid 1px #fff;
+    }
+
+        ul.menu1 li a {
+            margin: 0 20px;
+            color: #fff;
+            height: 36px;
+            line-height: 36px;
+            display: block;
+            font-weight: bold;
+            position: relative;
+            font-family: 黑体;
+        }
+
+    ul.menu1 > li a {
+        font-size: 20px;
+        height: 45px;
+        line-height: 45px;
+    }
+
+ul.menu2 > li a {
+    font-size: 18px;
+    height: 36px;
+    line-height: 36px;
+}
+
+ul.menu1 li .inactive {
+    background: url(images/off.png) no-repeat right center;
+    background-size: 25px;
+}
+
+ul.menu1 li .inactives {
+    background: url(images/on.png) no-repeat right center;
+    background-size: 25px;
+}
+
+ul.menu1 li ul {
+    display: none;
+}
+
+    ul.menu1 li ul li {
+        border-left: 0;
+        border-right: 0;
+        background-color: #ebe3e2;
+        border-color: #fff;
+    }
+
+        ul.menu1 li ul li ul {
+            display: none;
+        }
+
+        ul.menu1 li ul li a {
+            color: #012353;
+            margin-left: 20px;
+        }
+
+        ul.menu1 li ul li ul li {
+            background-color: #d6e6f1;
+            border-color: #6196bb;
+        }
+
+.last {
+    background-color: #d6e6f1;
+    border-color: #6196bb;
+}
+
+ul.menu1 li ul li ul li a, ul.menu1 li ul li ul > li > a :hover {
+    color: #316a91 !important;
+    margin-left: 40px;
+}

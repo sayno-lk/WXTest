@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>缤蓝- 后台</title>
+    <link href="http://web-pf.oss-cn-shanghai.aliyuncs.com/layui-v2.2.4/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/admin/main.css" rel="stylesheet" />   
+    <script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/js/jquery-3.2.1.js"></script>
+    <script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/layui-v2.2.4/layui.js"></script>
+</head>
+<body>
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header header header-doc">
+            <div class="layui-main">
+                <a class="logo abs" href="/">
+                    后台
+                </a>
+                @*<ul class="layui-nav " id="menu">
+                        <li class="layui-nav-item nav-project layui-this"><a href="/AdminScreen/index">项目管理</a></li>
+                        @if (ViewBag.AccountType == "Admin")
+                        {
+                            <li class="layui-nav-item nav-account"><a href="/Account/index">账号管理</a></li>
+                        }
+                    </ul>
+                    <ul class="layui-nav" lay-filter="">
+                        <li class="layui-nav-item"><span class="login-out" onclick="">@ViewBag.LoginName</span></li>
+                        <li class="layui-nav-item layui-this">
+                            <a class="login-out" onclick="LoginOut()">@(ViewBag.LoginName == null ? "" : "退出")</a>
+                        </li>
+                    </ul>*@
+            </div>
+        </div>
+        <div class="body-content">
+            @RenderBody()
+        </div>
+    </div>
+    <script>
+        layui.use(['layer', 'form', 'element', 'table'], function () {
+            var layer = layui.layer,
+            form = layui.form,
+            element = layui.element,
+            table = layui.table;
+            //……
+            //你的代码都应该写在这里面
+        });
+        $(window).on("load", function () {
+            $(".body-content").css("height", $(window).height() - $(".layui-header").height());
+        });
+    </script>
+</body>
+</html>

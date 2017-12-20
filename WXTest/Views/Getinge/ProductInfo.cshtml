@@ -1,0 +1,100 @@
+﻿@using WXTest.DB
+@model    List<Getinge_Product_Info>
+
+@{
+    ViewBag.Title = "产品信息";
+    Layout = "~/Views/Shared/_MNav1Layout.cshtml";
+}
+<link href="~/Content/Getinge/css/product-info.css?v=1" rel="stylesheet" />
+@*<link href="http://web-pf.oss-cn-shanghai.aliyuncs.com/layui-v2.2.4/css/layui.css" rel="stylesheet" />*@
+@*<script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/layui-v2.2.4/layui.js"></script>*@
+<style>
+    .content {
+    }
+            .word-box{
+                /*font-size:*/
+            }
+    .layui-carousel > div > div {
+        line-height: 280px;
+        text-align: center;
+        background-color: #fff !important;
+    }
+
+        .layui-carousel > div > div img {
+            max-width: 100%;
+            max-height: 100%;
+            vertical-align: middle;
+            display: inline-block;
+        }
+</style>
+<div class="wrap">
+    @*<div class="head">
+            <img src="~/Content/Getinge/images/logo.png" class="head-logo" />
+        </div>*@
+    <div class="content">
+        <div class="title">
+            @ViewBag.ProName
+        </div>
+        @if (Model.Count() != 0)
+        {
+            var imagesList = Model.Where(q => q.info_type == WXTest.Models.GetingeProductInfoTypeEnum.images.ToString()).ToList();
+            var word = Model.Where(q => q.info_type == WXTest.Models.GetingeProductInfoTypeEnum.word.ToString()).FirstOrDefault();
+            var video = Model.Where(q => q.info_type == WXTest.Models.GetingeProductInfoTypeEnum.video.ToString()).FirstOrDefault();
+            if (imagesList.Count > 0)
+            {
+                <div class="min-title">
+                    产品介绍
+                </div>
+                <div class="img-box">
+                    <div class="layui-carousel" id="testLb">
+                        <div carousel-item="">
+                            @for (int i = 0; i < imagesList.Count; i++)
+                            {
+                                <div><img src="@imagesList[i].info_content"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            if (word != null)
+            {
+                <div class="word-box">
+                    <pre id="word">"@word.info_content"</pre>
+                    @*<script>
+                            var c = "@word.info_content";//.replace(/\n/g, '<br>');$("#word").html(c);
+                            $("#word").html(c.replace(/\n/g, '<br>'));  //多个换行符
+                            //$("#word").html(c.replace("\n", '<br>'));  //一个换行符
+                        </script>*@
+                </div>
+            }
+            if (video != null)
+            {
+                <div class="min-title">
+                    视频介绍
+                </div>
+                <div class="video-box">
+                    <video controls="controls" src="@video.info_content" class="video"></video>
+                </div>
+            }
+        }
+    </div>
+</div>
+<script>
+    var time = "";
+    layui.use(['layer', 'carousel', 'form', 'element', 'table', 'laydate'], function () {
+        var layer = layui.layer, carousel = layui.carousel,
+        form = layui.form,
+        element = layui.element,
+        laydate = layui.laydate,
+        table = layui.table;
+        carousel.render({
+            elem: '#testLb',
+            width: '100%',
+            arrow: 'always',
+            interval: 3000
+        });
+        //监听工具条
+    });
+</script>
+
+

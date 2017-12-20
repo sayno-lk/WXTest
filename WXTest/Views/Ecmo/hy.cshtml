@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "行业先进文章";
+    Layout = "~/Views/Shared/_MPageLayout.cshtml";
+}
+
+<style>
+    .wrap {
+        overflow-y: auto;
+    }
+
+    .btn {
+        width: 90vw;
+        left: 5vw;
+        height: 25vw;
+        /*border: 1px solid red;*/
+    }
+
+    .btn1 {
+        top: 38vw;
+    }
+
+    .btn2 {
+        top: 72vw;
+    }
+
+    .btn3 {
+        top: 100vw;
+    }
+
+    .btn4 {
+        top: 132vw;
+    }
+
+    .demo {
+        width: 100%;
+        display: none;
+        top: 0;
+        left: 0;
+    }
+
+    .btn-close {
+        display: none;
+        top: 2vw;
+        width: 15vw;
+        left: 5vw;
+        height: 10vw;
+        z-index: 10;
+    }
+</style>
+<div class="wrap">
+    <img src="~/Content/Ecmo/images/hy-ml.jpg" class="w-img" />
+    <input type="button" value="" class="cus-none btn abs btn1" onclick="showPage(1)" />
+    <input type="button" value="" class="cus-none btn abs btn2" onclick="showPage(2)" />                                                                                             
+    <img src="~/Content/Ecmo/images/hy-ch.jpg" class="abs demo item1" />
+    <img src="~/Content/Ecmo/images/hy-en.jpg" class="abs demo item2" />
+    <div class="abs btn btn-close" onclick="closePage()">
+    </div>
+</div>
+<script>
+    $(window).on("load", function () {
+        $(".wrap").css("height", $(window).height());
+    });
+    function showPage(i) {
+        $(".item" + i).show();
+        $(".btn-close").show();
+    }
+    function closePage() {
+        $(".demo").hide();
+        //alert("ddd");
+        $(".btn-close").hide();
+    }
+</script>
+
+
+
+@*<link href="http://web-pf.oss-cn-shanghai.aliyuncs.com/Swiper4.03/css/swiper.min.css" rel="stylesheet" />
+    <script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/Swiper4.03/js/swiper.min.js"></script>
+    <link href="~/Content/css/animations.css" rel="stylesheet" />
+    <style>
+        body, .body-content {
+            text-align: center;
+            overflow: hidden;
+            background-color: black;
+        }
+
+        .fadeOutDown {
+            z-index: 10;
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+        }
+
+        .swiper-slide {
+            overflow: hidden;
+            overflow-y: auto;
+        }
+    </style>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="~/Content/Ecmo/images/hy-ch.jpg" class="w-img" />
+            </div>
+            <div class="swiper-slide">
+                <img src="~/Content/Ecmo/images/hy-en.jpg" class="w-img" />
+            </div>
+        </div>
+        <div class="swiper-button-prev swiper-button-black "></div>
+        <div class="swiper-button-next swiper-button-black "></div>
+    </div>
+    <script>
+        $(window).on("load", function () {
+            var h = $(window).height();
+            $("body").css("height", h);
+            $(".body-content").css("height", h);
+            $(".swiper-slide").css("height", h);
+            var mySwiper = new Swiper('.swiper-container', {
+                //direction: 'vertical',
+                keyboardControl: true,
+                loop: false,
+                autoHeight: true,
+                //height: window.innerHeight,//全屏
+                //resistanceRatio: 0
+                // 如果需要分页器
+                //pagination: '.swiper-pagination',
+
+                // 如果需要前进后退按钮
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+            });
+        });
+    </script>*@
+

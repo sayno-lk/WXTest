@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "AdminGetinge";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .leftTree {
+        width: 250px;
+        border-right: 1px solid red;
+        height:100%;
+        overflow:hidden;
+        overflow-y:auto;
+            
+    }
+    .layui-body{
+        left:251px;
+    }
+</style>
+<script src="~/Scripts/public/public.js"></script>
+<script src="~/Scripts/public/getJsonTree.js"></script>
+<ul id="leftTree" class="leftTree"></ul>
+
+<div class="layui-body site-demo">
+    <iframe scrolling="auto" allowtransparency="true" id="edit-iframe" name="edit-iframe" class="" frameborder="0" src="AdminGetingeProductEdit?productId=70" style="width:100%;height:98%"></iframe>
+</div>
+
+<script>
+    var time = "";
+    layui.use(['layer', 'form', 'element', 'table', 'tree', 'laydate'], function () {
+        var layer = layui.layer,
+        form = layui.form,
+        element = layui.element,
+        laydate = layui.laydate,
+        table = layui.table;
+        var node_data = [];
+
+        var user_data = function () {
+            var postdata = {};
+            $.ajax({
+                url: '/Admin/GetAdminGetingeProduct',
+                type: "post",
+                data: postdata,
+                beforeSend: function () {
+                    $("#btn_sub").attr("disabled", "disabled");
+                },
+                error: function (e) {
+                    console.log(e);
+                    $("#btn_sub").removeAttr("disabled");
+                    layer.open({
+                        content: "error",
+                        btn: "确定"
+                    });
+                },
+                success: function (data) {
+                    $("#btn_sub").removeAttr("disabled");
+                    $("#leftTree").html("");
+                    if (data.code == 1) {
+                        node_data = data.data;
+                        //console.log(createTree(node_data, 0));
+                        layui.tree({
+                            elem: '#leftTree', //指定元素
+                            nodes: createTree(node_data, 0),
+                            click: function (item) { //点击节点回调
+                                var obj=JSON.stringify(item);
+                                console.log(obj);
+                                if (item.children.length == 0) {                                     
+                                    $("#edit-iframe").attr("src", "AdminGetingeProductEdit?productId=" + item.id);
+                                    layer.msg('当前节名称：' + item.id + '<br>全部参数：' + "没有子集");
+                                }
+                                else {
+                                    //layer.msg('当前节名称：' + item.name + '<br>全部参数：' + "父级");
+                                    layer.prompt({
+                                        formType: 0,
+                                        value: item.name,
+                                        title: '修改父级名字',                                       
+                                    }, function (value, index, elem) {
+                                        //alert(item.id); //得到value
+
+                                        var postdata1 = {};
+                                        postdata1.productId = item.id;
+                                        postdata1.productName = value;
+                                        $.ajax({
+                                            url: '/Admin/UpDateGetingeProductName',
+                                            type: "post",
+                                            data: postdata1,
+                                            beforeSend: function () {
+                                                //$("#btn_sub").attr("disabled", "disabled");
+                                            },
+                                            error: function (e) {
+                                                console.log(e);
+                                                //$("#btn_sub").removeAttr("disabled");
+                                                layer.open({
+                                                    content: "error",
+                                                    btn: "确定"
+                                                });
+                                            },
+                                            success: function (res) {
+                                                if (res.code == 1) {
+                                                    layer.open({
+                                                        content: res.msg,
+                                                        btn: "确定"
+                                                    });
+                                                    layer.closeAll();
+                                                    console.log(elem);
+                                                    //user_data();
+                                                }
+                                                else {
+                                                    layer.open({
+                                                        content: res.msg,
+                                                        btn: "确定"
+                                                    });
+                                                }
+                                            }
+                                        });                                        
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        layer.open({
+                            content: data.msg,
+                            btn: "确定"
+                        });
+                    }
+                }
+            });
+        }
+        user_data();
+        //console.log(node_data);
+        //生成一个模拟树
+
+    });
+
+    $(window).on("load", function () {
+    });
+</script>
+
+

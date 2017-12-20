@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "产品目录";
+    Layout = "~/Views/Shared/_MNav1Layout.cshtml";
+}
+
+<style>
+    .btn {
+        width: 39vw;
+        left: 7vw;
+        top: 25vw;
+        height: 39vw;
+        /*border: 1px solid red;*/
+    }
+
+    .btn1 {
+         top: 60vw;
+    }
+
+    .btn2 {
+          top: 105vw;
+        left: 54vw;
+    }
+
+    .btn3 {
+        top: 151vw;
+        left: 7vw;
+    }
+</style>
+<div class="wrap">
+    <img src="~/Content/Getinge/images/product-main.jpg" class="w-img" />
+    <a href="ProductAct?productId=2" class="abs btn btn1"></a>
+    <a href="ProductAct?productId=3" class="abs btn btn2"></a>
+    <a href="ProductAct?productId=1" class="abs btn btn3"></a>
+</div>
+
+

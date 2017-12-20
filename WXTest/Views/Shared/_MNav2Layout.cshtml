@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/css/cus-main.css" rel="stylesheet" />
+    <script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/js/jquery-3.2.1.js"></script> 
+    <script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/js/public.js"></script>
+    <link href="http://web-pf.oss-cn-shanghai.aliyuncs.com/layui-v2.2.4/css/layui.css" rel="stylesheet" />
+    <script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/layui-v2.2.4/layui.js"></script>
+    <link href="~/Content/css/nav/responsive-nav.css" rel="stylesheet" />
+    <script src="~/Content/css/nav/responsive-nav.js"></script>
+    <link href="~/Content/css/nav/theme.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="body-content">
+        <nav class="nav-collapse">
+            <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">默认展开</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">选项一</a></dd>
+                        <dd><a href="javascript:;">选项二</a></dd>
+                        <dd><a href="javascript:;">选项三</a></dd>
+                        <dd><a href="">跳转项</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">解决方案</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">移动模块</a></dd>
+                        <dd><a href="">后台模版</a></dd>
+                        <dd><a href="">电商平台</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">云市场</a></li>
+                <li class="layui-nav-item"><a href="">社区</a></li>
+            </ul>
+        </nav>
+        <script>
+            var navigation = responsiveNav(".nav-collapse");
+        </script>
+        <script>
+            layui.use('element', function () {
+                var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+                //监听导航点击
+                element.on('nav(demo)', function (elem) {
+                    //console.log(elem)
+                    layer.msg(elem.text());
+                });
+            });
+        </script>
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,185 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/css/cus-main.css" rel="stylesheet" />
+    @*<script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/js/jquery-3.2.1.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/js/public.js"></script>
+    <link href="http://web-pf.oss-cn-shanghai.aliyuncs.com/layui-v2.2.4/css/layui.css" rel="stylesheet" />
+    <script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/layui-v2.2.4/layui.js"></script>
+    <link href="~/Content/css/nav-drawer/css/drawer.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/Content/css/nav-drawer/js/drawer.js"></script>
+    <link href="~/Content/css/nav-three/nav-three.css" rel="stylesheet" />
+    <script src="~/Content/css/nav-three/nav-three.js"></script>
+    <style>
+        .layui-nav-tree {
+            width: 100%;
+        }
+
+        .layui-nav-item .layui-nav-child {
+            background-color: #e6e6e6 !important;
+            color: #727272 !important;
+        }
+
+        .layui-nav-tree .layui-nav-child a {
+            color: #727272 !important;
+            border-bottom: solid 1px #bfbfbf;
+        }
+
+        .drawer-navbar .drawer-navbar-header {
+            border-bottom: none;
+        }
+
+        .drawer-open .drawer-navbar .drawer-navbar-header {
+            border-bottom: 1px solid #fff;
+        }
+
+        .drawer-navbar .drawer-navbar-header {
+            background-color: #012353;
+        }
+
+        .drawer-hamburger {
+            width: 1.5rem;
+            padding-right: 20px;
+        }
+
+        .drawer-hamburger-icon:before, .drawer-hamburger-icon:after {
+            top: -8px;
+        }
+
+        .drawer-hamburger-icon:after {
+            top: 8px;
+        }
+
+
+
+        .drawer-container {
+            background-color: #ebe3e2;
+            height: 3.75rem;
+            line-height: 3.75rem;
+        }
+
+        .drawer-navbar-header {
+            text-align: left;
+        }
+
+        .drawer-hamburger-icon, .drawer-hamburger-icon:before, .drawer-hamburger-icon:after {
+            background-color: #fff;
+        }
+
+        .head-logo {
+            width: 35vw;
+            left: 0;
+            vertical-align: middle;
+        }
+
+        .drawer-overlay {
+            background-color: #012353;
+        }
+
+        /*ul.menu1 li .inactives:after {
+            content: "-";
+            position: absolute;
+            font-size: 5vw;
+            right: 5px;
+        }
+
+        ul.menu1 li .inactive:after {
+            content: "+";
+            position: absolute;
+            font-size: 5vw;
+            right: 5px;
+        }*/
+    </style>
+</head>
+<body>
+    <div class="drawer drawer--top drawer--navbarTopGutter">
+        <header class="drawer-navbar drawer-navbar--fixed" role="banner">
+            <div class="drawer-container">
+                <div class="drawer-navbar-header">
+                    <img src="~/Content/Getinge/images/logo.png" class="head-logo" />
+                    <button type="button" class="drawer-toggle drawer-hamburger">
+                        <span class="sr-only">toggle navigation</span>
+                        <span class="drawer-hamburger-icon"></span>
+                    </button>
+                </div>
+                <nav class="drawer-nav" role="navigation">
+                    <ul class="menu1">
+                        <li>
+                            <a href="#" class="inactive">公司信息</a>
+                            <ul class="menu2">
+                                <li><a href="CompanyMain">公司信息</a></li>
+                                <li><a href="http://7d60c792.u.mgd5.com/campaigns/57ac2a93a3664ef44d00214c/20171202104019/5a22bb3892b579503a0bc327/index.html">新闻动态</a></li>
+                                <li><a href="CompanyZp">招兵买马</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="inactive">产品信息</a>
+                            <ul class="menu2">
+                                <li>
+                                    <a href="ProductMain">产品目录</a>
+                                </li>
+                                <li>
+                                    <a href="DeptMain">科室目录</a>
+                                </li>
+                                @*<li>
+                                        <a href="#" class="inactive active">中国文联美术艺术中心</a>
+                                        <ul class="menu3">
+                                            <li><a href="#">综合部</a></li>
+                                            <li><a href="#">大型活动部</a></li>
+                                            <li><a href="#">展览部</a></li>
+                                            <li><a href="#">艺委会工作部</a></li>
+                                            <li><a href="#">信息资源部</a></li>
+                                            <li><a href="#">双年展办公室</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="inactive active">中国文联美术艺术中心</a>
+                                        <ul class="menu3">
+                                            <li><a href="#">综合部</a></li>
+                                            <li><a href="#">大型活动部</a></li>
+                                            <li><a href="#">展览部</a></li>
+                                            <li><a href="#">艺委会工作部</a></li>
+                                            <li><a href="#">信息资源部</a></li>
+                                            <li><a href="#">双年展办公室</a></li>
+                                        </ul>
+                                    </li>*@
+                            </ul>
+                        </li>
+                        <li><a href="http://7d60c792.u.mgd5.com/campaigns/57ac2a93a3664ef44d00214c/20171215110919/5a33ccc492b5793dfb0c5720/index.html">联系我们</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>    
+        <script>
+            $(document).ready(function () {
+                $('.drawer').drawer();
+            });
+        </script>
+        @*<script>          
+            layui.use(['layer','form', 'element', ], function () {
+                var layer = layui.layer, form = layui.form,
+                element = layui.element;
+           
+            });
+        </script>*@
+        <div class="body-content">
+            @RenderBody()
+        </div>
+        <footer>
+            <img src="~/Content/Getinge/images/foot.jpg" class="w-img" />
+        </footer>
+    </div>
+
+</body>
+</html>

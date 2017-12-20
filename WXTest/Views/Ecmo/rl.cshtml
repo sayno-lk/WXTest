@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "培训日历表";
+    Layout = "~/Views/Shared/_MPageLayout.cshtml";
+}
+<link href="~/Content/css/cus-layar-mobile.css" rel="stylesheet" />
+<script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/layer_mobile/layer.js"></script>
+<style>
+    .cus-btn {
+        left: 66vw;
+        width: 20vw;
+        top: 62vw;
+        height: 7vw;
+    }
+
+    .cus-none {
+        /*border: 1px solid red;*/
+    }
+
+    .item1 {
+        top: 68vw;
+    }
+
+    .item2 {
+        left: 48vw;
+        top: 126vw;
+    }
+
+    .item3 {
+        left: 34vw;
+        top: 183vw;
+    }
+
+    .item4 {
+        top: 206vw;
+    }
+</style>
+<div class="wrap">
+    <img src="~/Content/Ecmo/images/rl.jpg" class="w-img" />
+    <input type="button" value="" class="cus-none cus-btn abs item1" id="btn1" onclick="subEnroll(this)" name="ECMO学习班" />
+    <input type="button" value="" class="cus-none cus-btn abs item2" id="btn2" onclick="subEnroll(this)" name="ECMO亚太培训班" />
+    <input type="button" value="" class="cus-none cus-btn abs item3" id="btn3" onclick="subEnroll(this)" name="ECMO培训" />
+    @*<input type="button" value="" class="cus-none cus-btn abs item4" name="user_phone" />*@
+</div>
+<script>
+    function subEnroll(obj) {
+        $this = $(obj);
+        //console.log($this.attr("name"));
+        var postdata = {};
+        postdata.openid = request("openid");
+        postdata.enroll_name = obj.name;
+
+        $.ajax({
+            url: '/Ecmo/AddEnroll',
+            type: 'post',
+            data: postdata,
+            dataType: 'json',
+            beforeSend: function () {
+                $this.attr("disabled", "disabled");
+                return;
+            },
+            error: function (e) {
+                $this.removeAttr("disabled");
+                layer.open({
+                    content: '系统错误',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                });
+            },
+            success: function (data) {
+                $this.removeAttr("disabled");
+                if (data.code == 1) {
+                    layer.open({
+                        content: data.msg,
+                        btn: '确定'
+                        //yes: function () {
+                        //    window.location.href = "demo";
+                        //}
+                    });
+                }
+                else {
+                    layer.open({
+                        content: data.msg
+                    });
+                }
+            }
+        });
+    }
+</script>

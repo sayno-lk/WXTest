@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "注册";
+    Layout = "~/Views/Shared/_MPageLayout.cshtml";
+}
+
+<script src="~/Scripts/public/form-validate.js"></script>
+<link href="~/Content/css/cus-layar-mobile.css" rel="stylesheet" />
+<script src="http://web-pf.oss-cn-shanghai.aliyuncs.com/layer_mobile/layer.js"></script>
+<style>
+    .cus-item {
+        left: 27.5vw;
+        width: 56vw;
+        top: 62vw;
+        height: 7vw;
+    }
+
+    .cus-none {
+        /*border: 1px solid red;*/
+    }
+
+    .item1 {
+        top: 43.5vw;
+    }
+
+    .item2 {
+        top: 53.5vw;
+    }
+
+    .item3 {
+        top: 64.5vw;
+    }
+
+    .item4 {
+        top: 75vw;
+    }
+
+    .btn-sub {
+        top: 92vw;
+        width: 40vw;
+        left: 30vw;
+        height: 12vw;
+    }
+</style>
+<div class="wrap">
+    <img src="~/Content/Ecmo/images/login.jpg" class="w-img" />
+    <input type="text" value="" class="cus-none cus-item abs item1" name="user_name" />
+    <input type="text" value="" class="cus-none cus-item abs item2" name="user_hospital" />
+    <input type="text" value="" class="cus-none cus-item abs item3" name="user_dept" />
+    <input type="text" value="" class="cus-none cus-item abs item4" name="user_phone" />
+    <input type="button" id="btn_sub" value="" class="cus-none abs btn-sub" onclick="subLogin()" />
+</div>
+<script>
+    function subLogin() {
+        var postdata = $(".cus-item").serializeObject();
+        postdata.openid = request("openid");
+
+        if (postdata.openid == "") {
+            layer.open({
+                content: "参数错误",
+            });
+            return;
+        }
+        if (postdata.user_name.trim() == "") {
+            layer.open({
+                content: "请输入完整",
+            });
+            return;
+        }
+        if (postdata.user_hospital.trim() == "") {
+            layer.open({
+                content: "请输入完整",
+            });
+            return;
+        }
+        if (postdata.user_dept.trim() == "") {
+            layer.open({
+                content: "请输入完整",
+            });
+            return;
+        }
+        if (postdata.user_phone.trim() == "") {
+            layer.open({
+                content: "请输入完整",
+            });
+            return;
+        }
+        $.ajax({
+            url: '/Ecmo/AddUser',
+            type: 'post',
+            data: postdata,
+            dataType: 'json',
+            beforeSend: function () {
+                $("#btn_sub").attr("disabled", "disabled");
+            },
+            error: function (e) {
+                $("#btn_sub").removeAttr("disabled");
+                console.log(e);
+                layer.open({
+                    content: '系统错误',
+                    skin: 'msg',
+                    time: 2 //2秒后自动关闭
+                });
+            },
+            success: function (data) {
+                $("#btn_sub").removeAttr("disabled");
+                if (data.code == 1) {
+                    layer.open({
+                        content: data.msg
+                        , btn: '确定'
+                        , yes: function () {
+                            window.location.href = "demo"
+                        }
+                    });
+
+                }
+                else {
+                    layer.open({
+                        content: data.msg
+                    });
+                }
+            }
+        });
+    }
+
+</script>

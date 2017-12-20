@@ -1,0 +1,61 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    pointer-events: none;
+    -webkit-user-select: none;
+}
+
+.wrap {
+    min-width: 320px;
+    max-width: 640px;
+    margin: auto;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.tran {
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.tranX {
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.tranY {
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.rel {
+    position: relative;
+}
+
+.abs {
+    position: absolute;
+}
+
+.w-img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.cus-none {
+    border: none;
+    background: none;
+    outline: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(255,255,255,0); /*选中时的阴影*/
+}

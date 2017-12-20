@@ -1,0 +1,73 @@
+﻿.bgsoundsw {
+    z-index: 98;
+    position: fixed;
+    top: 8%;
+    right: 8%;
+    width: 30px;
+    height: 30px;
+    /*background: url(../music/soundSW.png) no-repeat 0 1px;*/
+    background-size: 30px auto;
+    opacity: 1;
+}
+
+    .bgsoundsw dt, .bgsoundsw dd {
+        width: 30px;
+        height: 30px;
+        background: url(soundSW.png) no-repeat;
+        background-size: 30px auto;
+    }
+
+    .bgsoundsw dd {
+        /*background-position: 0 -73px;*/
+        display: none;
+    }
+
+    .bgsoundsw dt {
+        /*background-position: 0 -36px;*/
+        -webkit-animation: soundswANI 1.5s infinite linear;
+        -moz-animation: soundswANI 1.5s infinite linear;
+        -o-animation: soundswANI 1.5s infinite linear;
+        animation: soundswANI 1.5s infinite linear;
+    }
+
+/*Begin--音乐--Begin*/
+@-webkit-keyframes soundswANI {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes soundswANI {
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes soundswANI {
+    0% {
+        -o-transform: rotate(0deg);
+    }
+
+    100% {
+        -o-transform: rotate(360deg);
+    }
+}
+
+@keyframes soundswANI {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/*End--音乐--End*/

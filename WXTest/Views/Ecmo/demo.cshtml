@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "案例分享";
+    Layout = "~/Views/Shared/_MPageLayout.cshtml";
+}
+
+<style>
+    .wrap{
+         overflow-y:auto;
+    }
+    .btn {
+        width: 90vw;
+        left: 5vw;
+        height: 25vw;
+        /*border: 1px solid red;*/
+    }
+
+    .btn1 {
+        top: 34vw;
+    }
+
+    .btn2 {
+        top: 68vw;
+    }
+
+    .btn3 {
+        top: 103vw;
+    }
+
+    .btn4 {
+        top: 138vw;
+    }
+
+    .demo {
+        width: 100%;
+        display: none;
+        top: 0;
+        left: 0;
+    }
+
+    .btn-close {
+        display: none;
+        top: 2vw;
+        width: 15vw;
+        left: 5vw;
+        height: 10vw;
+        z-index: 10;
+    }
+</style>
+<div class="wrap">
+    <img src="~/Content/Ecmo/images/demo/ml.jpg" class="w-img" />
+    <input type="button" value="" class="cus-none btn abs btn1" onclick="showPage(1)" />
+    <input type="button" value="" class="cus-none btn abs btn2" onclick="showPage(2)" />
+    <input type="button" value="" class="cus-none btn abs btn3" onclick="showPage(3)" />
+    <input type="button" value="" class="cus-none btn abs btn4" onclick="showPage(4)" />
+
+    <img src="~/Content/Ecmo/images/demo/1.jpg" class="abs demo item1" />
+    <img src="~/Content/Ecmo/images/demo/2.jpg" class="abs demo item2" />
+    <img src="~/Content/Ecmo/images/demo/3.jpg" class="abs demo item3" />
+    <img src="~/Content/Ecmo/images/demo/4.jpg" class="abs demo item4" />
+    <div class="abs btn btn-close" onclick="closePage()" >
+        @*<img src="~/Content/Ecmo/images/demo/btn-back.png" class="w-img"/>*@
+    </div>
+</div>
+<script>
+    $(window).on("load", function () {
+        $(".wrap").css("height", $(window).height());
+    });
+    function showPage(i) {
+        $(".item" + i).show();
+        $(".btn-close").show();
+    }
+    function closePage() {
+        $(".demo").hide();
+        //alert("ddd");
+        $(".btn-close").hide();
+    }
+</script>

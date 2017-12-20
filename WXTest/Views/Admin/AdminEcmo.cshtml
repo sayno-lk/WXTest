@@ -1,0 +1,201 @@
+﻿
+@{
+    ViewBag.Title = "AdminEcmo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Scripts/public/public.js"></script>
+<div class="layui-tab-content">
+    <div class="site-content">
+        <div class="layui-tab layui-tab-card" lay-filter="tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this" lay-id="1">注册报名数据</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-elem-quote">
+                        <div class="layui-input-inline">  
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn btn-reload" data-type="getReload">刷新</button>
+                            <button class="layui-btn layui-btn-danger btn-reload" data-type="DelEcmoUserData">清除用户数据</button>
+                            @Html.ActionLink("下载用户数据", "ExportEcmoUser", "", new { @class = "layui-btn" })
+                        </div>
+                    </div>
+                    <table id="user_data" lay-filter="user_data"></table>
+                    <script type="text/html" id="dateFormat">
+                        {{ getDateToFormat(d.user_date)}}
+                    </script>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="barDemo">
+    @*<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>*@
+    {{#  if(d.msg_status == 0){ }}
+    <a class="layui-btn layui-btn-mini " lay-event="check">上墙</a>
+    {{#  }else if(d.msg_status == 1){ }}
+    <a class="layui-btn layui-btn-mini " lay-event="checkTwo">再次上墙</a>
+    {{#  } }}
+</script>
+<script>
+    var time = "";
+    layui.use(['layer', 'form', 'element', 'table', 'laydate'], function () {
+        var layer = layui.layer,
+        form = layui.form,
+        element = layui.element,
+        laydate = layui.laydate,
+        table = layui.table;
+
+        //监听工具条
+        table.on('tool(user_data)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'detail') {
+                layer.msg('ID：' + data.id + ' 的查看操作');
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if (obj.event === 'check') {
+                //layer.alert('编辑行：<br>' + JSON.stringify(data));
+                //layer.close(index);
+                var postdata = {};
+                postdata.msg_id = data.msg_id;
+                console.log(data.msg_id);
+                //这里一般是发送修改的Ajax请求
+                $.ajax({
+                    url: '/AdminApi/UpMsgWallAdminMsg',
+                    type: "post",
+                    data: postdata,
+                    dataType: 'json',
+                    beforeSend: function () {
+                        //$("#btnSubQuestion").attr("disabled", "disabled");
+                    },
+                    error: function (e) {
+                        layer.alert("正在查询数据，请稍后...");
+                    },
+                    success: function (data) {
+                        console.log(data.code);
+                        if (data.code == "1") {
+                            layer.msg(data.msg, { icon: 1, time: 1000 });
+                            msg_table.reload({});
+                        }
+                        else {
+                            layer.alert(data.msg);
+                        }
+                    }
+                });
+            } else if (obj.event === 'checkTwo') {
+                //layer.alert('编辑行：<br>' + JSON.stringify(data));
+                //layer.close(index);
+                var postdata = {};
+                postdata.msg_id = data.msg_id;
+                console.log(data.msg_id);
+                //这里一般是发送修改的Ajax请求
+                $.ajax({
+                    url: '/AdminApi/UpMsgWallAdminMsg2',
+                    type: "post",
+                    data: postdata,
+                    dataType: 'json',
+                    beforeSend: function () {
+                        //$("#btnSubQuestion").attr("disabled", "disabled");
+                    },
+                    error: function (e) {
+                        layer.alert("正在查询数据，请稍后...");
+                    },
+                    success: function (data) {
+                        console.log(data.code);
+                        if (data.code == "1") {
+                            layer.msg(data.msg, { icon: 1, time: 1000 });
+                            msg_table.reload({});
+                        }
+                        else {
+                            layer.alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+
+        var user_data = table.render({
+            elem: '#user_data',
+            url: '/Admin/GetAdminEcmoUser',
+            where: { date: time },
+            method: 'post',
+            height: 'full-280',
+            cols: [[ //标题栏
+            { type: 'numbers' },
+            //{ field: 'msg_id', title: 'ID', width: 80, sort: true },
+            //{ field: 'openid', title: '微信ID', width: 250 },
+            { field: 'user_name', title: '姓名', width: 150 },
+            { field: 'user_hospital', title: '医院', width: 200 },
+            { field: 'user_dept', title: '科室', width: 120 },
+            { field: 'user_phone', title: '手机', width: 120 },
+            { field: 'enroll_name', title: '班级', width: 300 },
+            { field: 'user_date', title: '时间', width: 180, templet: '#dateFormat' },
+            ]],
+            skin: 'row',//表格风格
+            even: true,
+            page: true, //是否显示分页
+            limits: [15, 30, 45],
+            limit: 15 //每页默认显示的数量
+        });
+
+
+        var layid = location.hash.replace(/^#tabId=/, '');
+        //alert(layid);
+        element.tabChange('tab', layid);
+
+
+        element.on('tab(tab)', function (data) {
+            location.hash = 'tabId=' + $(this).attr('lay-id');
+            //console.log(this); //当前Tab标题所在的原始DOM元素
+            //console.log(data.index); //得到当前Tab的所在下标
+            //console.log(data.elem); //得到当前的Tab大容器
+        });
+        var active = {
+            getReload: function () {
+                tableIns.reload({});
+                msg_table.reload({});
+                sub_table.reload({});
+            }, DelEcmoUserData: function () {
+                layer.confirm('您确定要删除所有用户数据吗？', {
+                    btn: ['确定', '取消'] //按钮
+                }, function () {
+                    $.ajax({
+                        url: '/Admin/DelEcmoUserData',
+                        type: "post",
+                        data: "",
+                        dataType: 'json',
+                        beforeSend: function () {
+                            //$("#btnSubQuestion").attr("disabled", "disabled");
+                        },
+                        error: function (e) {
+                            layer.alert("正在查询数据，请稍后...");
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            if (data.code == "1") {
+                                layer.msg(data.msg, { icon: 1, time: 1000 });
+                                user_data.reload({
+                                });
+                            }
+                            else {
+                                layer.alert(data.msg);
+                            }
+                        }
+                    });
+                }, function () {
+                });
+            }
+        };
+
+        $('.btn-reload').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+

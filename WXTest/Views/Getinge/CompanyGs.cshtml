@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "我们的故事";
+    Layout = "~/Views/Shared/_MNav1Layout.cshtml";
+}
+
+<style>
+    .btn {
+        width: 40vw;
+        left: 6vw;
+        top: 18.5vw;
+        height: 40vw;
+        /*border: 1px solid red;*/
+    }
+
+    .video-box {
+        top: 60vw;
+        width:90vw;              
+        left: 5vw;
+        /*border: 1px solid red;*/
+    }
+
+    .video {
+        width: 100%;
+    }
+</style>
+<div class="wrap">
+    <img src="~/Content/Getinge/images/company-gs.jpg" class="w-img" />
+    <div class="abs video-box">
+        <video controls="controls" src="~/Content/Getinge/images/company-gs.mp4" class="video"></video>
+    </div>
+    @*<a href="company" class="abs btn btn1"></a>
+        <a href="product" class="abs btn btn2"></a>
+        <a href="CompanyLs" class="abs btn btn3"></a>
+        <a href="product" class="abs btn btn4"></a>*@
+</div>
+
+

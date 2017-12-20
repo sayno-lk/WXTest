@@ -1,0 +1,62 @@
+﻿@using WXTest.Models
+@model List<GetingeProductPrants>
+@{
+    //ViewBag.Title = "ACT重症和心血管系统";
+    Layout = "~/Views/Shared/_MNav1Layout.cshtml";
+}
+
+<link href="~/Content/Getinge/css/product-tree.css" rel="stylesheet" />
+<div class="wrap">
+    <img src="~/Content/Getinge/images/product-top.jpg" class="w-img" />
+    <style>
+        .seach-box {
+            top: 10vw;
+            width: 100%;
+        }
+    </style>
+    <div class="seach-box">
+        @{Html.RenderPartial("_MPSearchPartial"); }
+    </div>
+    <ul class="menu">
+        @if (Model.Count > 0)
+        {
+            var list = Model.Where(q => q.parent_id == ViewBag.Model.product_id).ToList();
+            for (int i = 0; i < list.Count; i++)
+            {
+                var itemList = Model.Where(q => q.parent_id == list[i].product_id).ToList();
+                <li>
+                    @if (itemList.Count > 0)
+                    {
+                        <div>@list[i].product_name</div>
+                        <ul class="menu1">
+                            @for (int j = 0; j < itemList.Count; j++)
+                            {
+                                var itemChildList = Model.Where(q => q.parent_id == itemList[j].product_id).ToList();
+                                <li>
+                                    @if (itemChildList.Count > 0)
+                                    {
+                                        <a href="javascript:;" class="inactive">@itemList[j].product_name</a>
+                                        <ul class="menu2">
+                                            @for (int x = 0; x < itemChildList.Count; x++)
+                                            {
+                                                <li><a href="ProductInfo?productId=@(itemChildList[x].product_id)" class="product-info">@itemChildList[x].product_name</a></li>
+                                            }
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <a href="ProductInfo?productId=@(itemList[j].product_id)" class="product-info">@itemList[j].product_name</a>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <div>@list[i].product_name</div>
+                    }
+                </li>
+            }
+        }
+    </ul>
+</div>

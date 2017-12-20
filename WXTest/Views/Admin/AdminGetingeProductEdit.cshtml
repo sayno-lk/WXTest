@@ -1,0 +1,661 @@
+﻿@using WXTest.DB
+@model List<Getinge_Product_Info>
+@{
+    ViewBag.Title = "AdminGetingeProductEdit";
+    Layout = "~/Views/Shared/_AdminEditLayout.cshtml";
+}
+<style>
+    .site-demo-body {
+        margin: 20px 30px 10px;
+    }
+
+        .site-demo-body .layui-form, .cus-box-inline {
+            max-width: 1000px;
+        }
+
+    .cus-box-inline {
+        margin: 20px 0;
+    }
+
+    .layui-red, .layui-red cite {
+        color: #FF5722 !important;
+    }
+
+    .edit-btn-box {
+        margin: 20px 30px 10px;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .btn-del {
+        top: 15px;
+        right: 2px;
+        font-size: 15px;
+        display: block;
+    }
+
+    .layui-form-item:hover .btn-del {
+        display: block;
+    }
+
+    .cus-form-textarea {
+        width: 400px;
+        margin: 10px;
+    }
+
+    .upload-video-form, .upload-word-form, .upload-images-form {
+        position: relative;
+    }
+
+    .upload-btn-box {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: none;
+    }
+
+    .upload-btn-block {
+        display: block;
+    }
+
+    .upload-item {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        float: left;
+        margin: 10px;
+        border: 1px solid #00ff21;
+        overflow: hidden;
+    }
+
+        .upload-item:hover .upload-btn-box {
+            display: block;
+        }
+
+    .upload-video {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        margin: 10px;
+        border: 1px solid #00ff21;
+        overflow: hidden;
+    }
+
+        .upload-video video {
+            width: 100%;
+        }
+
+        .upload-video:hover .upload-btn-box {
+            display: block;
+        }
+</style>
+<div class="site-demo site-demo-body">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>项目信息</legend>
+    </fieldset>
+
+    <div class="layui-breadcrumb " lay-separator=">">
+        @if (ViewBag.ProName != null)
+        {
+            List<WXTest.Models.GetingeProductPrants> tree = ViewBag.ProName;
+            string pName = "";
+            for (int i = 0; i < ViewBag.ProName.Count; i++)
+            {
+                if (i == ViewBag.ProName.Count - 1)
+                {
+                    pName = ViewBag.ProName[i].product_name;
+                    <a class="layui-red"><cite>@ViewBag.ProName[i].product_name</cite></a>  }
+                else
+                {
+                    <a href="">@ViewBag.ProName[i].product_name</a>
+                }
+            }
+            <div class="cus-box-inline">
+                <div class="layui-form-item"> 
+                    <label class="layui-form-label">项目名字</label>               
+                    <div class="layui-input-inline">
+                        <input placeholder="请输入名字" id="productName" value="@pName" lay-verify="required" class="layui-input" maxlength="1000" />
+                    </div>
+                    <button type="button" class="layui-btn" onclick="updateName()">修改</button>
+                </div>
+            </div>
+        }
+    </div>
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>编辑项目</legend>
+    </fieldset>
+    <div class="edit-btn-box">
+        <button type="button" class="layui-btn layui-btn-primary" onclick="addWord()"><i class="layui-icon">&#xe654;</i>文字</button>
+        <button type="button" class="layui-btn layui-btn-primary" onclick="addImgList()"><i class="layui-icon">&#xe654;</i>图片集</button>
+        <button type="button" class="layui-btn layui-btn-primary" onclick="addVideo()"><i class="layui-icon">&#xe654;</i>视频</button>
+    </div>
+
+    <form class="layui-form" action="">
+        @if (Model.Count > 0)
+        {
+            var list = Model.Where(q => q.info_type == WXTest.Models.GetingeProductInfoTypeEnum.images.ToString()).ToList();
+            if (list.Count > 0)
+            {
+                <div class="layui-form-item upload-images-form">
+                    <button type="button" class="layui-btn layui-btn-danger abs btn-del" onclick="delImages()"><i class="layui-icon">&#xe640;</i>删除</button>
+                    <fieldset class="layui-elem-field">
+                        <legend>图片集</legend>
+                        @for (int i = 0; i < list.Count; i++)
+                        {
+                            <div class="upload-item layui-upload">
+                                <img id="uploadImg@(list[i].info_img_index)" src="@list[i].info_content" class="w-img">
+                                <div class="upload-btn-box tran">
+                                    <button type="button" class="layui-btn" id="uploadBtn@(list[i].info_img_index)"><i class="layui-icon">&#xe654;</i>更换图片</button>
+                                </div>
+                            </div>
+                            <script>
+                                $(window).on("load", function () {
+                                    var index= @(list[i].info_img_index);
+                                    var btnId = "uploadBtn" + index;
+                                    var imgId = "uploadImg" + index;
+                                    upload.render({
+                                        url: '/OssUpload/UploadProductImg?pId=' + pid + "&index=" + index,//上传接口
+                                        elem: '#' + btnId,
+                                        method: 'post',
+                                        accept: 'file',//普通文件
+                                        done: function (res) {
+                                            if (res.code == 1) {
+                                                $("#" + imgId).attr("src", res.msg);
+                                                $("#" + imgId).show();
+                                                if ($("#" + btnId).parent().hasClass("upload-btn-block")) {
+                                                    addImgItem();
+                                                    $("#" + btnId).parent().removeClass("upload-btn-block");
+                                                }
+                                                console.log($("#" + btnId).html());
+                                                $("#" + btnId).html('<i class="layui-icon">&#xe642;</i>更换图片');
+
+                                            } else {
+                                                layer.msg(res.msg, {
+                                                    icon: 2,
+                                                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                                                });
+                                            }
+                                        }
+                                    });
+                                });
+                            </script>
+                        }
+
+                        <div class="upload-item layui-upload">
+                            <img id="uploadImg@(list.Count+1)" src="" class="w-img hide">
+                            <div class="upload-btn-box upload-btn-block tran">
+                                <button type="button" class="layui-btn" id="uploadBtn@(list.Count+1)"><i class="layui-icon">&#xe654;</i>上传图片</button>
+                            </div>
+                        </div>
+                        <script>
+                            $(window).on("load", function () {
+                                var index= @(list.Count+1);
+                                var btnId = "uploadBtn" + index;
+                                var imgId = "uploadImg" + index;
+                                upload.render({
+                                    url: '/OssUpload/UploadProductImg?pId=' + pid + "&index=" + index,//上传接口
+                                    elem: '#' + btnId,
+                                    method: 'post',
+                                    accept: 'file',//普通文件
+                                    done: function (res) {
+                                        if (res.code == 1) {
+                                            $("#" + imgId).attr("src", res.msg);
+                                            $("#" + imgId).show();
+                                            if ($("#" + btnId).parent().hasClass("upload-btn-block")) {
+
+                                                addImgItem();
+                                                $("#" + btnId).parent().removeClass("upload-btn-block");
+                                            }
+                                            console.log($("#" + btnId).html());
+                                            $("#" + btnId).html('<i class="layui-icon">&#xe642;</i>更换图片');
+
+                                        } else {
+                                            layer.msg(res.msg, {
+                                                icon: 2,
+                                                time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                                            });
+                                        }
+                                    }
+                                });
+                            });
+                        </script>
+                    </fieldset>
+                </div>
+            }
+            var word = Model.Where(q => q.info_type == WXTest.Models.GetingeProductInfoTypeEnum.word.ToString()).FirstOrDefault();
+            if (word != null)
+            {
+                <div class="layui-form-item upload-word-form">
+                    <button type="button" class="layui-btn layui-btn-danger abs btn-del" onclick="delWord()"><i class="layui-icon">&#xe640;</i>删除</button>
+                    <fieldset class="layui-elem-field">
+                        <legend>文字</legend>
+                        <div class="layui-form-item cus-form-textarea">
+                            <textarea placeholder="请输入内容" name="content" lay-verify="required" class="layui-textarea" maxlength="1000">@word.info_content</textarea>
+                        </div>
+                        <div class="layui-form-item layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="sub-word">立即提交</button>
+                        </div>
+                    </fieldset>
+                </div>
+
+            }
+            var video = Model.Where(q => q.info_type == WXTest.Models.GetingeProductInfoTypeEnum.video.ToString()).FirstOrDefault();
+            if (video != null)
+            {
+                <div class="layui-form-item upload-video-form">
+                    <button type="button" class="layui-btn layui-btn-danger abs btn-del" onclick="delVideoFun()"><i class="layui-icon">&#xe640;</i>删除</button>
+                    <fieldset class="layui-elem-field">
+                        <legend>视频</legend>
+                        <div class="upload-video layui-upload">
+                            <video src="@video.info_content" id="uploadVideo"></video>
+                            <div class="upload-btn-box tran">
+                                <button type="button" class="layui-btn" id="uploadVideoBtn"><i class="layui-icon">&#xe67c;</i>更换视频</button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+                <script>
+                    $(window).on("load", function () {
+                        var videoId = "uploadVideo";
+                        var btnId = "uploadVideoBtn";
+                        upload.render({
+                            url: '/OssUpload/UploadProductVideo?pId=' + pid ,
+                            elem: '#' + btnId          ,
+                            accept: 'video' ,//视频
+                            done: function (res) {
+                                if (res.code == 1) {
+                                    $("#" + videoId).attr("src", res.msg);
+                                    $("#" + videoId).show();
+                                    if ($("#" + btnId).parent().hasClass("upload-btn-block")) {
+                                        $("#" + btnId).parent().removeClass("upload-btn-block");
+                                    }
+                                    console.log($("#" + btnId).html());
+                                    $("#" + btnId).html('<i class="layui-icon">&#xe681;</i>更换视频');
+
+                                } else {
+                                    layer.msg(res.msg, {
+                                        icon: 2,
+                                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                                    });
+                                }
+                            }
+                        });
+                    });
+                </script>
+            }
+        }
+    </form>
+</div>
+
+<script>
+    var layer;
+    layui.use(['layer', 'form', 'element', 'layedit', 'laydate', 'upload'], function () {
+        layer = layui.layer,
+         form = layui.form,
+         layedit = layui.layedit,
+         laydate = layui.laydate,
+         upload = layui.upload,
+         element = layui.element;
+
+        form.on('checkbox(chk-msg)', function (data) {
+            console.log(data.elem.checked);
+            if (data.elem.checked) {
+                $(".msg-type").show();
+            }
+            else {
+                $(".msg-type").hide();
+            }
+        });
+
+        //监听提交
+        form.on('submit(sub-word)', function (data) {
+            var postdata = {};
+            //postdata.content=encodeURI(data.field.content);
+            postdata.content=data.field.content;
+            postdata.pId=pid;
+            console.log(postdata);
+            //return false;
+            $.ajax({
+                url: '/Admin/AddWord',
+                type: "post",
+                data: postdata,
+                beforeSend: function () {
+                    //$("#btnSubQuestion").attr("disabled", "disabled");
+                },
+                error: function (e) {
+                    console.log(e);
+                    layer.msg("错误", {
+                        icon: 2,
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                },
+                success: function (res) {
+                    console.log(res);
+                    if (res.code == 1) {
+                        $("#edit-iframe", parent.document).attr("src", "AdminGetingeProductEdit?productId=" + pid);//刷新iframe
+                    }
+                    else {
+                        layer.open({
+                            content: res.msg
+                           , btn: '确定'
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+        //监听提交
+        form.on('submit(btn-del)', function (data) {
+
+            return false;
+        });
+    });
+    function addWord() {
+        var count = $(".upload-word-form").length;
+        console.log(count);
+        if (count > 0) {
+            layer.msg("只能添加一个文本", {
+                icon: 2,
+                time: 2000 //2秒关闭（如果不配置，默认是3秒）
+            });
+            return;
+        }  else{
+            var str = '<div class="layui-form-item upload-word-form"> \
+                        <button type="button" class="layui-btn layui-btn-danger abs btn-del" onclick="delWord()"><i class="layui-icon">&#xe640;</i>删除</button>\
+                        <fieldset class="layui-elem-field">\
+                        <legend>文字</legend>    \
+                        <div class="layui-form-item cus-form-textarea">\
+                            <textarea placeholder="请输入内容" name="content" lay-verify="required" class="layui-textarea" maxlength="1000"></textarea>    \
+                        </div>      \
+                        <div class="layui-form-item layui-input-block"> \
+                            <button class="layui-btn" lay-submit="" lay-filter="sub-word">立即提交</button>     \
+                        </div>  \
+                        </fieldset>  \
+                    </div>';
+            $(".layui-form").append(str);
+        }
+    }
+    var pid = request("productId");
+    function addImgList() {
+        var count = $(".upload-images-form").length;
+        var btnId = "uploadBtn1";
+        var imgId = "uploadImg1";
+        console.log(count);
+        if (count > 0) {
+            layer.msg("只能一个图片集", {
+                icon: 2,
+                time: 2000 //2秒关闭（如果不配置，默认是3秒）
+            });
+            return;
+        } else {
+            var str = '<div class="layui-form-item upload-images-form"> \
+                        <button type="button" class="layui-btn layui-btn-danger abs btn-del" onclick="delImages()"><i class="layui-icon">&#xe640;</i>删除</button>\
+                        <fieldset class="layui-elem-field">\
+                            <legend>图片集</legend> \
+                            <div class="upload-item layui-upload"> \
+                            <img id="' + imgId + '" src="" class="w-img hide"> \
+                            <div class="upload-btn-box upload-btn-block tran"> \
+                                <button type="button" class="layui-btn" id="' + btnId + '"><i class="layui-icon">&#xe654;</i>上传图片</button> \
+                            </div> \
+                            </div> \
+                        </fieldset> \
+                    </div>';
+            $(".layui-form").append(str);
+        }
+
+        upload.render({
+            url: '/OssUpload/UploadProductImg?pId=' + pid + "&index=1" //上传接口
+            , elem: '#' + btnId
+            , method: 'post'
+            , accept: 'file' //普通文件
+            , done: function (res) {
+                if (res.code == 1) {
+                    $("#" + imgId).attr("src", res.msg);
+                    $("#" + imgId).show();
+                    if ($("#" + btnId).parent().hasClass("upload-btn-block")) {
+                        addImgItem();
+                        $("#" + btnId).parent().removeClass("upload-btn-block");
+                    }
+
+                    console.log($("#" + btnId).html());
+                    $("#" + btnId).html('<i class="layui-icon">&#xe642;</i>更换图片');
+
+                } else {
+                    layer.msg(res.msg, {
+                        icon: 2,
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                }
+            }
+        });
+    }
+    function addImgItem() {
+        var index = $(".upload-item").length + 1;         ;
+        var btnId = "uploadBtn" + index;
+        var imgId = "uploadImg" + index;
+        var str = '<div class="upload-item layui-upload"> \
+                        <img id="' + imgId + '" src="" class="w-img hide"> \
+                        <div class="upload-btn-box upload-btn-block tran"> \
+                            <button type="button" class="layui-btn" id="' + btnId + '"><i class="layui-icon">&#xe654;</i>上传图片</button> \
+                        </div> \
+                    </div> ';
+        $(".upload-images-form div.upload-item:last").after(str);
+        //$(".upload-images-form div.upload-item").last().after(str);
+        //console.log($(".upload-images-form div.upload-item:last").html());
+        //console.log($(".upload-images-form div.upload-item:last-child").html());
+        upload.render({
+            url: '/OssUpload/UploadProductImg?pId=' + pid + "&index=" + index //上传接口
+         , elem: '#' + btnId
+         , method: 'post'
+         , accept: 'file' //普通文件
+         , done: function (res) {
+             if (res.code == 1) {
+                 $("#" + imgId).attr("src", res.msg);
+                 $("#" + imgId).show();
+                 if ($("#" + btnId).parent().hasClass("upload-btn-block")) {
+                     addImgItem();
+                     $("#" + btnId).parent().removeClass("upload-btn-block");
+                 }
+                 console.log($("#" + btnId).html());
+                 $("#" + btnId).html('<i class="layui-icon">&#xe642;</i>更换图片');
+
+             } else {
+                 layer.msg(res.msg, {
+                     icon: 2,
+                     time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                 });
+             }
+         }
+        });
+    }
+
+    function addVideo() {
+        var videoId = "uploadVideo";
+        var btnId = "uploadVideoBtn";
+        var count = $(".upload-video-form").length;
+        if (count > 0) {
+            layer.msg("只能一个视频", {
+                icon: 2,
+                time: 2000 //2秒关闭（如果不配置，默认是3秒）
+            });
+            return;
+        }
+        else {
+            var str = ' <div class="layui-form-item upload-video-form"> \
+                            <button type="button" class="layui-btn layui-btn-danger abs btn-del" onclick="delVideo()"><i class="layui-icon">&#xe640;</i>删除</button>\
+                            <fieldset class="layui-elem-field">     \
+                                <legend>视频</legend>               \
+                                <div class="upload-video layui-upload">    \
+                                <video src="" id="uploadVideo"></video>    \
+                                <div class="upload-btn-box upload-btn-block tran">    \
+                                    <button type="button" class="layui-btn" id="uploadVideoBtn"><i class="layui-icon">&#xe67c;</i>上传视频</button>      \
+                                </div>         \
+                                </div>     \
+                            </fieldset>    \
+                        </div>';
+            $(".layui-form").append(str);
+        }
+
+        upload.render({
+            url: '/OssUpload/UploadProductVideo?pId=' + pid
+            , elem: '#' + btnId
+            , accept: 'video' //视频
+            , done: function (res) {
+                if (res.code == 1) {
+                    $("#" + videoId).attr("src", res.msg);
+                    $("#" + videoId).show();
+                    if ($("#" + btnId).parent().hasClass("upload-btn-block")) {
+                        $("#" + btnId).parent().removeClass("upload-btn-block");
+                    }
+                    console.log($("#" + btnId).html());
+                    $("#" + btnId).html('<i class="layui-icon">&#xe681;</i>更换视频');
+
+                } else {
+                    layer.msg(res.msg, {
+                        icon: 2,
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                }
+            }
+        });
+    }
+
+    function delVideoFun(){
+        var postdata = {};
+        postdata.pId=pid;
+        console.log(pid);
+        postdata.pType="video";
+
+        $.ajax({
+            url: '/Admin/DelGetingeProductVideo',
+            type: "post",
+            data: postdata,
+            beforeSend: function () {
+                //$("#btnSubQuestion").attr("disabled", "disabled");
+            },
+            error: function (e) {
+                console.log(e);
+                layer.msg("错误", {
+                    icon: 2,
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                });
+            },
+            success: function (res) {
+                if (res.code == 1) {
+                    //alert(pid+"::"+ postdata.pId);
+                    $("#edit-iframe", parent.document).attr("src", "AdminGetingeProductEdit?productId=" + postdata.pId);//刷新iframe
+                }
+                else {
+                    layer.open({
+                        content: res.msg
+                       , btn: '确定'
+                    });
+                }
+            }
+        });
+    }
+
+    function delImages(){
+        var postdata = {};
+        postdata.pId=pid;
+        postdata.pType="images";
+
+        $.ajax({
+            url: '/Admin/DelGetingeProductImages',
+            type: "post",
+            data: postdata,
+            beforeSend: function () {
+                //$("#btnSubQuestion").attr("disabled", "disabled");
+            },
+            error: function (e) {
+                console.log(e);
+                layer.msg("错误", {
+                    icon: 2,
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                });
+            },
+            success: function (res) {
+                console.log(res);
+                if (res.code == 1) {
+                    $("#edit-iframe", parent.document).attr("src", "AdminGetingeProductEdit?productId=" + pid);//刷新iframe
+                }
+                else {
+                    layer.open({
+                        content: res.msg
+                       , btn: '确定'
+                    });
+                }
+            }
+        });
+    }
+    function delWord(){
+        var postdata = {};
+        postdata.pId=pid;
+        postdata.pType="word";
+
+        $.ajax({
+            url: '/Admin/DelGetingeProductWord',
+            type: "post",
+            data: postdata,
+            beforeSend: function () {
+                //$("#btnSubQuestion").attr("disabled", "disabled");
+            },
+            error: function (e) {
+                console.log(e);
+                layer.msg("错误", {
+                    icon: 2,
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                });
+            },
+            success: function (res) {
+                console.log(res);
+                if (res.code == 1) {
+                    $("#edit-iframe", parent.document).attr("src", "AdminGetingeProductEdit?productId=" + pid);//刷新iframe
+                }
+                else {
+                    layer.open({
+                        content: res.msg
+                       , btn: '确定'
+                    });
+                }
+            }
+        });
+    }
+
+    function updateName(){
+        var postdata = {};
+        postdata.productId=pid;
+        postdata.productName=$("#productName").val();
+
+        $.ajax({
+            url: '/Admin/UpDateGetingeProductName',
+            type: "post",
+            data: postdata,
+            beforeSend: function () {
+                //$("#btnSubQuestion").attr("disabled", "disabled");
+            },
+            error: function (e) {
+                console.log(e);
+                layer.msg("错误", {
+                    icon: 2,
+                    time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                });
+            },
+            success: function (res) {
+                console.log(res);
+                if (res.code == 1) {
+                    $("#edit-iframe", parent.document).attr("src", "AdminGetingeProductEdit?productId=" + pid);//刷新iframe
+                }
+                else {
+                    layer.open({
+                        content: res.msg
+                       , btn: '确定'
+                    });
+                }
+            }
+        });
+    }
+</script>
